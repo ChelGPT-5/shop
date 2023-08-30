@@ -42,8 +42,6 @@ class Author(models.Model):
     def get_absolute_url(self):
         return reverse('author-detail', args=[str(self.pk)])
 
-    def get_absolute_url(self):
-        return reverse('book-detail', args=[str(self.pk)])
 
 class Book(models.Model):
     title = models.CharField(max_length=100)
@@ -55,6 +53,9 @@ class Book(models.Model):
 
     def display_genre(self):
         return ', '.join([genre.name for genre in self.genre.all()])
+
+    def get_absolute_url(self):
+        return reverse('book-detail', args=[str(self.pk)])
 
 
 class BookInstance(models.Model):

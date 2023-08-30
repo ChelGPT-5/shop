@@ -38,3 +38,8 @@ class BookListView(ListView):
 class BookDetailView(DetailView):
     model = Book
     template_name = 'book_detail.html'
+
+
+class BookInstanceDetailView(DetailView):
+    model = BookInstance
+    template_name = 'book_instance_detail.html'
