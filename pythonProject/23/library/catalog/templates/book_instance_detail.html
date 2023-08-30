@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Book:
+        <a href="{{ bookinstance.book.get_absolute_url }}">{{ bookinstance.book.title}}</a>
+    </h1>
+    <h2>ISBN: {{ bookinstance.isbn }}</h2>
+    <h2>Language: {{ bookinstance.language.name }}</h2>
+    <h2>Status: {{ bookinstance.status }}</h2>
+{% endblock %}

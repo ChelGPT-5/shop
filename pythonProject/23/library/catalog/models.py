@@ -70,3 +70,6 @@ class BookInstance(models.Model):
     due_back = models.DateTimeField(null=True, blank=True)
     language = models.ForeignKey(Language, on_delete=models.CASCADE)
     status = models.CharField(max_length=15, choices=STATUSES, default='Available')
+
+    def get_absolute_url(self):
+        return reverse('book-instance-detail', args=[self.pk])
