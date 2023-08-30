@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 
 # Create your models here.
@@ -15,6 +16,9 @@ class Country(models.Model):
 
 class Genre(models.Model):
     name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
 
 
 class Language(models.Model):
@@ -32,6 +36,14 @@ class Author(models.Model):
     date_of_death = models.DateTimeField(null=True, blank=True)
     country = models.ForeignKey(Country, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.pseudonym
+
+    def get_absolute_url(self):
+        return reverse('author-detail', args=[str(self.pk)])
+
+    def get_absolute_url(self):
+        return reverse('book-detail', args=[str(self.pk)])
 
 class Book(models.Model):
     title = models.CharField(max_length=100)

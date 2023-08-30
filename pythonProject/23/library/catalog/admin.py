@@ -26,7 +26,7 @@ class BookInstanceAdmin(admin.ModelAdmin):
     list_display = ['book', 'status', 'borrower', 'due_back', 'isbn']
     fieldsets = (
         ('Group1', {
-            'fields': ('book', 'isbn', 'status')
+            'fields': ('book', 'isbn', 'status', 'language')
         }),
         ('Group2', {
             'fields': ('borrower', 'due_back')
