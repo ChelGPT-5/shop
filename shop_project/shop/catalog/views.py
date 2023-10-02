@@ -13,7 +13,7 @@ class CategoriesListView(ListAPIView):
     serializer_class = CategorySerializer
 
 class CategoryProductsView(APIView):
-    permission_classes = (AllowAny, )
+    permission_classes = (AllowAny,)
 
     def get(self, request, category_id):
         queryset = Product.objects.filter(category__id=category_id)
