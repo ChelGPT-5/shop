@@ -1,6 +1,3 @@
-from itertools import product
-
-from django.shortcuts import render
 from catalog.models import Category, Product, Discount, Seller, Basket
 from rest_framework.views import APIView
 from rest_framework.generics import ListAPIView
@@ -8,8 +5,10 @@ from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from catalog.serializers import (CategorySerializer, SellerSerializer,
                                  ProductSerializer, DiscountSerializer,
-                                 AddProductSerializer, BasketSerializer, DeleteProductSerializer)
+                                 AddProductSerializer, BasketSerializer, DeleteProductSerializer,
+                                 OrderSerializer)
 from django.db.models import F
+
 
 class CategoriesListView(ListAPIView):
     queryset = Category.objects.all()
@@ -84,9 +83,9 @@ class BasketView(APIView):
     def get(self, request):
         user = request.user
         basket = Product.objects.prefetch_related('basket_set').filter(basket__user=user).values(
-                "name", "price", "discount", count=F("basket_count"),
-                discount_persent=F("discount__percent"),
-                discount_date_end=F("discount__date_end"))
+            "name", "price", "discount", count=F("basket_count"),
+            discount_persent=F("discount__percent"),
+            discount_date_end=F("discount__date_end"))
 
         serializer = BasketSerializer({"products": basket})
         return Response(serializer.data)
@@ -98,3 +97,14 @@ class BasketView(APIView):
         product = Product.objects.get(id=input_serializer.data['product_id'])
         Basket.objects.get(user=request.user, product=product).delete()
         return Response
+
+
+class OrderView(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request):
+        input_serializer = OrderSerializer(data=request.data, context={'request': request})
+        input_serializer.is_valid(raise_exception=True)
+
+        input_serializer.save()
+        return Response(input_serializer.data)
