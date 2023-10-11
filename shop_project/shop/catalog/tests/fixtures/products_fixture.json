@@ -1,0 +1,16 @@
+[
+  {
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+        "name": "Phone",
+        "price": "100.00",
+        "articul": "Phone Acticul",
+        "description": "Phone Android",
+        "count_on_stock": 50,
+        "discount": 1,
+        "category": 1,
+        "seller": 1
+    }
+  }
+]

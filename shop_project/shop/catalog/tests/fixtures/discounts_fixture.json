@@ -1,0 +1,12 @@
+[
+  {
+    "model": "catalog.discount",
+    "pk": 1,
+    "fields": {
+        "percent": 10,
+        "name": "10 percent",
+        "date_start": "2023-09-25T18:47:12Z",
+        "date_end": "2023-10-04T18:47:17Z"
+    }
+  }
+]
