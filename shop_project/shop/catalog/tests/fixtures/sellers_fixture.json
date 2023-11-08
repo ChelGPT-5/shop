@@ -1,0 +1,11 @@
+[
+  {
+    "model": "catalog.seller",
+    "pk": 1,
+    "fields": {
+        "name": "Apple",
+        "country": "USA",
+        "description": "apple"
+    }
+  }
+]
